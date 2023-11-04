@@ -2,11 +2,12 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const PORT = 3000 || process.env.PORT;
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const users = [];
 
+app.get("/", (req, res) => [res.end("hello")]);
 app.post("/register", (req, res) => {
   const { username, password } = req.body;
   users.push({ username, password });
@@ -20,7 +21,7 @@ app.post("/login", (req, res) => {
   const user = users.find(
     (user) => user.username === username && user.password === password
   );
-  console.log(req.body,'ok');
+  console.log(req.body, "ok");
   console.log(users);
   if (user) {
     res.send("Login successful!");
