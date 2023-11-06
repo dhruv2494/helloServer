@@ -8,9 +8,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const users = [];
 
 app.get("/", (req, res) => [res.end("hello")]);
+app.get("/data", (req, res) => [res.end(JSON.stringify(users))]);
 app.post("/register", (req, res) => {
-  const { username, password } = req.body;
-  users.push({ username, password });
+  // const { username, password } = req.body;
+  users.push(req.body);
   console.log(req.body);
   res.send("Registration successful!");
 });
@@ -24,7 +25,7 @@ app.post("/login", (req, res) => {
   console.log(req.body, "ok");
   console.log(users);
   if (user) {
-    res.send("Login successful!");
+    res.send({ login: true, data: user });
   } else {
     res.status(401).send("Invalid credentials");
   }
