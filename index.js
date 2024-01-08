@@ -13,7 +13,7 @@ app.post("/register", (req, res) => {
   // const { username, password } = req.body;
   users.push(req.body);
   console.log(req.body);
-  res.send("Registration successful!");
+  res.send("Registration successfully!");
 });
 
 app.post("/login", (req, res) => {
